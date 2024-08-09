@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Orson and Manny's Campaign Manager</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+        background-color: #f4f4f4;
+      }
+      .container {
+        max-width: 800px;
+        margin: auto;
+        background: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        color: #333;
+      }
+      button {
+        background-color: #4caf50;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+      }
+      #output {
+        margin-top: 20px;
+        white-space: pre-wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Orson and Manny's Campaign Manager</h1>
+      <button id="triggerWorkflow">Trigger Workflow</button>
+      <div id="output"></div>
+    </div>
+
+    <script>
+      document
+        .getElementById('triggerWorkflow')
+        .addEventListener('click', async () => {
+          const outputDiv = document.getElementById('output')
+          outputDiv.innerHTML = 'Processing...'
+
+          try {
+            const response = await fetch('/trigger-workflow', {
+              method: 'POST',
+            })
+            const data = await response.json()
+
+            outputDiv.innerHTML = `
+                    <h2>Workflow Results:</h2>
+                    <h3>Content Strategy:</h3>
+                    <p>${data.strategy}</p>
+                    <h3>Generated Content:</h3>
+                    <p>${data.content}</p>
+                    <h3>Orson's Post:</h3>
+                    <p>${data.orsonPost}</p>
+                    <h3>Manny's Post:</h3>
+                    <p>${data.mannyPost}</p>
+                `
+          } catch (error) {
+            outputDiv.innerHTML = `An error occurred: ${error.message}`
+          }
+        })
+    </script>
+  </body>
+</html>

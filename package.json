@@ -1,0 +1,14 @@
+{
+  "name": "orson-manny-campaign",
+  "version": "1.0.0",
+  "description": "Campaign Manager for Orson and Manny",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "axios": "^1.7.3",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  }
+}
